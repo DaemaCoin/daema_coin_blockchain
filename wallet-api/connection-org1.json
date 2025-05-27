@@ -1,0 +1,79 @@
+{
+    "name": "wallet-network",
+    "version": "1.0.0",
+    "client": {
+      "organization": "Org1",
+      "connection": {
+        "timeout": {
+          "peer": {
+            "endorser": "3000"
+          },
+          "orderer": "3000"
+        }
+      }
+    },
+    "channels": {
+      "mychannel": {
+        "orderers": [
+          "orderer.example.com"
+        ],
+        "peers": {
+          "peer0.org1.example.com": {
+            "endorsingPeer": true,
+            "chaincodeQuery": true,
+            "ledgerQuery": true,
+            "eventSource": true
+          }
+        }
+      }
+    },
+    "organizations": {
+      "Org1": {
+        "mspid": "Org1MSP",
+        "peers": [
+          "peer0.org1.example.com"
+        ],
+        "certificateAuthorities": [
+          "ca.org1.example.com"
+        ]
+      }
+    },
+    "orderers": {
+      "orderer.example.com": {
+        "url": "grpcs://192.168.1.60:7050",
+        "grpcOptions": {
+          "ssl-target-name-override": "orderer.example.com",
+          "hostnameOverride": "orderer.example.com"
+        },
+        "tlsCACerts": {
+          "path": "./ca.crt"
+        }
+      }
+    },
+    "peers": {
+      "peer0.org1.example.com": {
+        "url": "grpcs://192.168.1.60:7051",
+        "grpcOptions": {
+          "ssl-target-name-override": "peer0.org1.example.com",
+          "hostnameOverride": "peer0.org1.example.com",
+          "request-timeout": 300000
+        },
+        "tlsCACerts": {
+          "path": "./ca.crt"
+        }
+      }
+    },
+    "certificateAuthorities": {
+      "ca.org1.example.com": {
+        "url": "https://192.168.1.60:7054", 
+        "caName": "ca-org1",                
+        "tlsCACerts": {
+          "path": "./ca.crt"
+        },
+        "httpOptions": {
+          "verify": false
+        }
+      }
+    }
+  }
+  
